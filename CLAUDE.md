@@ -54,34 +54,32 @@ burgon/
 │   ├── .env
 │   ├── .env.example
 │   │
-│   ├── emailTemplates/               # Handlebars HTML email templates
-│   │   ├── layouts/
-│   │   │   └── main.handlebars
+│   ├── emailTemplates/
 │   │   ├── order-confirmed.html
 │   │   ├── bill-receipt.html
 │   │   ├── low-stock-alert.html
 │   │   └── shift-reminder.html
 │   │
 │   └── src/
-│       ├── app.ts                    # Entry point — runs all loaders
-│       ├── data-source.ts            # TypeORM AppDataSource
+│       ├── app.ts
+│       ├── data-source.ts
 │       │
-│       ├── config/                   # App-level config
-│       │   ├── config.ts             # env vars
-│       │   ├── redis.ts              # Redis client
-│       │   ├── socket.ts             # Socket.IO server init
-│       │   └── param.ts              # Shared constants
+│       ├── config/
+│       │   ├── config.ts
+│       │   ├── redis.ts
+│       │   ├── socket.ts
+│       │   └── param.ts
 │       │
-│       ├── loaders/                  # Bootstrap modules (run in order from app.ts)
-│       │   ├── winstonLoader.ts      # Logger init
-│       │   ├── iocLoader.ts          # TypeDI container wiring
-│       │   ├── typeormLoader.ts      # DB connection
-│       │   ├── expressLoader.ts      # Main express app setup + routing
-│       │   ├── graphqlLoader.ts      # Apollo Server setup (menu GraphQL)
-│       │   ├── socketLoader.ts       # Socket.IO init + KDS room setup
-│       │   └── bullmqLoader.ts       # BullMQ workers init
+│       ├── loaders/
+│       │   ├── winstonLoader.ts
+│       │   ├── iocLoader.ts
+│       │   ├── typeormLoader.ts
+│       │   ├── expressLoader.ts
+│       │   ├── graphqlLoader.ts
+│       │   ├── socketLoader.ts
+│       │   └── bullmqLoader.ts
 │       │
-│       ├── controllers/              # Route handlers (admin/internal API)
+│       ├── controllers/
 │       │   ├── AuthController.ts
 │       │   ├── TableController.ts
 │       │   ├── ReservationController.ts
@@ -92,7 +90,7 @@ burgon/
 │       │   ├── ShiftController.ts
 │       │   └── ReportController.ts
 │       │
-│       ├── services/                 # Business logic layer
+│       ├── services/
 │       │   ├── AuthService.ts
 │       │   ├── TableService.ts
 │       │   ├── ReservationService.ts
@@ -105,11 +103,11 @@ burgon/
 │       │   ├── EmailService.ts
 │       │   └── ReportService.ts
 │       │
-│       ├── models/                   # TypeORM entities
+│       ├── models/
 │       │   ├── User.ts
 │       │   ├── Role.ts
-│       │   ├── AuthItem.ts           # RBAC permission items
-│       │   ├── AuthAssignment.ts     # RBAC user-role mapping
+│       │   ├── AuthItem.ts
+│       │   ├── AuthAssignment.ts
 │       │   ├── Table.ts
 │       │   ├── Reservation.ts
 │       │   ├── MenuCategory.ts
@@ -118,108 +116,102 @@ burgon/
 │       │   ├── MenuItemModifier.ts
 │       │   ├── Order.ts
 │       │   ├── OrderItem.ts
-│       │   ├── OrderStatusLog.ts     # State machine audit log
+│       │   ├── OrderStatusLog.ts
 │       │   ├── Bill.ts
 │       │   ├── BillItem.ts
 │       │   ├── Payment.ts
-│       │   ├── PaymentWebhook.ts     # Idempotency — raw webhook log
+│       │   ├── PaymentWebhook.ts
 │       │   ├── InventoryItem.ts
-│       │   ├── InventoryLog.ts       # Stock change audit
+│       │   ├── InventoryLog.ts
 │       │   ├── Staff.ts
 │       │   ├── Shift.ts
 │       │   └── Attendance.ts
 │       │
-│       ├── graphql/                  # Menu module — GraphQL only
-│       │   ├── schema/
-│       │   │   └── menu.graphql      # Type definitions
+│       ├── graphql/
+│       │   ├── schema/menu.graphql
 │       │   ├── resolvers/
 │       │   │   ├── MenuCategoryResolver.ts
 │       │   │   ├── MenuItemResolver.ts
 │       │   │   └── MenuModifierResolver.ts
-│       │   └── dataloaders/
-│       │       └── MenuDataLoader.ts # Solves N+1 query problem
+│       │   └── dataloaders/MenuDataLoader.ts
 │       │
-│        ├── microservices/            # Public-facing APIs (customer-facing)
-│       │   └── v1/
-│       │       ├── customer/                          # Customer website API (port 3001)
-│       │       │   ├── customerServiceLoader.ts       # Express app on port 3001
-│       │       │   └── controllers/
-│       │       │       ├── CustomerAuthController.ts  # Register, login, OTP verify
-│       │       │       ├── CustomerMenuController.ts  # Browse menu (Redis cached)
-│       │       │       ├── CustomerOrderController.ts # Place order, track order status
-│       │       │       ├── CustomerTableController.ts # QR scan → get table info
-│       │       │       └── CustomerBillController.ts  # View bill, initiate payment
-│       │       └── kds/
-│       │           ├── kdsServiceLoader.ts            # Express app on port 3002
-│       │           └── controllers/
-│       │               └── KdsController.ts           # Kitchen display — order queue
+│       ├── microservices/v1/
+│       │   ├── customer/
+│       │   │   ├── customerServiceLoader.ts
+│       │   │   └── controllers/
+│       │   │       ├── CustomerAuthController.ts
+│       │   │       ├── CustomerMenuController.ts
+│       │   │       ├── CustomerOrderController.ts
+│       │   │       ├── CustomerTableController.ts
+│       │   │       └── CustomerBillController.ts
+│       │   └── kds/
+│       │       ├── kdsServiceLoader.ts
+│       │       └── controllers/KdsController.ts
 │       │
-│       ├── middlewares/              # Express middleware / guards
-│       │   ├── CheckJwtMiddleware.ts          # Staff/admin JWT auth
-│       │   ├── CheckCustomerJwtMiddleware.ts  # Customer JWT auth
-│       │   ├── CheckPermissionMiddleware.ts   # RBAC role guard
-│       │   ├── RedisRateLimiterMiddleware.ts  # Rate limiting via Redis
-│       │   ├── IdempotencyMiddleware.ts       # Payment idempotency key check
-│       │   ├── ApiLoggerMiddleware.ts         # Request logger
-│       │   └── ErrorHandlerMiddleware.ts      # Global error handler
+│       ├── middlewares/
+│       │   ├── CheckJwtMiddleware.ts
+│       │   ├── CheckCustomerJwtMiddleware.ts
+│       │   ├── CheckPermissionMiddleware.ts
+│       │   ├── RedisRateLimiterMiddleware.ts
+│       │   ├── IdempotencyMiddleware.ts
+│       │   ├── ApiLoggerMiddleware.ts
+│       │   └── ErrorHandlerMiddleware.ts
 │       │
-│       ├── helpers/                  # Integrations and reusable utilities
-│       │   ├── ApiHelper.ts          # sendSuccessResponse / sendErrorResponse / pagination
-│       │   ├── MailHelper.ts         # Nodemailer + Handlebars
-│       │   ├── RedisHelper.ts        # get/set/del with TTL wrappers
-│       │   ├── QrHelper.ts           # QR code generation per table
-│       │   ├── S3Helper.ts           # Cloudinary / S3 image uploads
-│       │   ├── WhatsAppHelper.ts     # WhatsApp notification
+│       ├── helpers/
+│       │   ├── ApiHelper.ts
+│       │   ├── MailHelper.ts
+│       │   ├── RedisHelper.ts
+│       │   ├── QrHelper.ts
+│       │   ├── S3Helper.ts
+│       │   ├── WhatsAppHelper.ts
 │       │   └── Payments/
-│       │       ├── TapHelper.ts      # Tap payment gateway
-│       │       └── StripeHelper.ts   # Stripe payment gateway
+│       │       ├── TapHelper.ts
+│       │       └── StripeHelper.ts
 │       │
-│       ├── interfaces/               # TypeScript contracts
+│       ├── interfaces/
 │       │   ├── IControllerInterface.ts
 │       │   ├── ICrudInterface.ts
 │       │   └── IServiceInterface.ts
 │       │
-│       ├── lib/                      # Cross-cutting framework code
+│       ├── lib/
 │       │   ├── env/
-│       │   │   ├── index.ts          # sendSuccessResponse / sendErrorResponse
-│       │   │   ├── OrderEnum.ts      # Order state machine enum
-│       │   │   ├── RoleEnum.ts       # User role enum
-│       │   │   ├── PaymentEnum.ts    # Payment status enum
+│       │   │   ├── index.ts
+│       │   │   ├── OrderEnum.ts
+│       │   │   ├── RoleEnum.ts
+│       │   │   ├── PaymentEnum.ts
 │       │   │   └── utils.ts
 │       │   └── logger/
 │       │       ├── Logger.ts
 │       │       └── index.ts
 │       │
-│       ├── queue/                    # BullMQ job definitions and workers
+│       ├── queue/
 │       │   ├── jobs/
-│       │   │   ├── EmailJob.ts       # Send receipt / alert emails
-│       │   │   ├── LowStockJob.ts    # Inventory threshold check
-│       │   │   └── NotifyJob.ts      # Push / WhatsApp notifications
+│       │   │   ├── EmailJob.ts
+│       │   │   ├── LowStockJob.ts
+│       │   │   └── NotifyJob.ts
 │       │   └── workers/
 │       │       ├── EmailWorker.ts
 │       │       ├── LowStockWorker.ts
 │       │       └── NotifyWorker.ts
 │       │
-│       ├── socket/                   # Socket.IO event handlers
-│       │   ├── kdsHandler.ts         # Kitchen order events (new order, status change)
-│       │   └── orderHandler.ts       # Customer order tracking events
+│       ├── socket/
+│       │   ├── kdsHandler.ts
+│       │   └── orderHandler.ts
 │       │
-│       └── migrations/               # TypeORM migration files
-│           └── (auto-generated)
+│       └── migrations/
 │
-└── web/                              # Angular frontend
+└── web/
     ├── package.json
-    └── src/
-        └── app/
-            ├── core/                 # Guards, interceptors, auth service
-            ├── shared/               # Nebular UI module, shared components
-            └── modules/
-                ├── auth/
-                ├── customer/         # QR ordering portal (mobile-first)
-                ├── waiter/
-                ├── kitchen/          # KDS live view (Socket.IO)
-                ├── cashier/
-                └── admin/            # Dashboard, reports, config
+    └── src/app/
+        ├── core/
+        ├── shared/
+        └── modules/
+            ├── auth/
+            ├── customer/
+            ├── waiter/
+            ├── kitchen/
+            ├── cashier/
+            └── admin/
 ```
 
 ---
@@ -277,10 +269,10 @@ sendErrorResponse(res, 400, 'Table not available')
 - Customer never gets access to internal fields (cost price, staff notes, admin flags)
 
 ```
-CustomerMenuController   → calls → MenuService     (same service admin uses)
-CustomerOrderController  → calls → OrderService    (same service waiter uses)
-CustomerBillController   → calls → BillingService  (same service cashier uses)
-CustomerTableController  → calls → TableService    (same service admin uses)
+CustomerMenuController   → calls → MenuService
+CustomerOrderController  → calls → OrderService
+CustomerBillController   → calls → BillingService
+CustomerTableController  → calls → TableService
 ```
 
 ### Customer API Endpoints (port 3001)
@@ -358,13 +350,6 @@ STRIPE_SECRET_KEY=
   feat(module): what was built
   fix(module): what was fixed
   chore: what was set up
-  ```
-- Examples:
-  ```
-  chore: scaffold base project structure and loaders
-  feat(auth): add JWT middleware and user entity
-  feat(table): add table CRUD endpoints
-  fix(order): resolve duplicate webhook idempotency issue
   ```
 - Never commit `node_modules/`, `.env`, or build files
 - Always commit after: scaffold, new entity, new controller, new service, migration, bug fix
