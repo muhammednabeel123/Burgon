@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Block the backend source folder from ever being indexed
+Disallow: /api/
+
+Sitemap: https://www.burgonfoods.com/sitemap.xml
