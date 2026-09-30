@@ -439,6 +439,8 @@ section{padding:64px 20px;position:relative;border-bottom:1px solid var(--line)}
 .loc-card .ico{font-size:.52rem;letter-spacing:.26em;color:var(--neon);border:1px solid var(--line);width:max-content;padding:4px 8px;margin-bottom:12px;text-transform:uppercase}
 .loc-card h4{font-size:.85rem;margin-bottom:8px;letter-spacing:.08em}
 .loc-card p{color:var(--grey);font-size:.62rem;line-height:1.95;text-transform:uppercase;letter-spacing:.05em}
+.loc-card .order-link{display:inline-block;margin-top:12px;padding:9px 14px;background:var(--black);color:var(--white);border:1px solid var(--neon);font-size:.56rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;transition:background .15s,color .15s}
+.loc-card .order-link:hover{background:var(--white);color:var(--black)}
 .map-box{min-height:320px;filter:grayscale(1) invert(.92) contrast(.95);transition:filter .4s}
 .map-box:hover{filter:grayscale(.2)}
 .map-box iframe{width:100%;height:100%;min-height:320px;border:0}
@@ -1059,7 +1061,7 @@ footer{background:var(--black)}
         <div class="loc-card"><div class="ico">LOC //</div><h4>Address</h4><p>Burgon — Crafted to Crave<br>Kunnumpuram Junction, Kunnumpuram,<br>Vanchiyoor, Thiruvananthapuram,<br>Keralam 695035</p></div>
         <div class="loc-card"><div class="ico">HRS //</div><h4>Opening Hours</h4><p>Mon – Thu: 11 AM – 11 PM<br>Fri – Sun: 11 AM – 12 Midnight</p></div>
         <div class="loc-card"><div class="ico">TEL //</div><h4>Call / Order</h4><p>+91 95444 54300<br>hello@burgon.in</p></div>
-        <div class="loc-card"><div class="ico">DLV //</div><h4>Delivery</h4><p>Available on Swiggy & Zomato<br>across Thiruvananthapuram</p></div>
+        <div class="loc-card"><div class="ico">DLV //</div><h4>Delivery</h4><p>Available on Swiggy & Zomato<br>across Thiruvananthapuram</p><a href="https://www.zomato.com/trivandrum/burgon-palayam/order" class="order-link" target="_blank" rel="noopener">Order on Zomato ↗</a></div>
       </div>
       <div class="map-box">
         <iframe src="https://maps.google.com/maps?q=Kunnumpuram%20Junction%2C%20Vanchiyoor%2C%20Thiruvananthapuram%2C%20Kerala%20695035&z=14&output=embed" loading="lazy" title="Map showing Burgon at Kunnumpuram Junction, Vanchiyoor, Thiruvananthapuram" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1097,6 +1099,7 @@ footer{background:var(--black)}
       <a href="tel:+919544454300">+91 95444 54300</a>
       <a href="mailto:hello@burgon.in">hello@burgon.in</a>
       <a href="#location">Kunnumpuram, Trivandrum</a>
+      <a href="https://www.zomato.com/trivandrum/burgon-palayam/order" target="_blank" rel="noopener">Order on Zomato ↗</a>
     </div>
     <div class="foot-col">
       <h5>Follow</h5>
@@ -1109,9 +1112,10 @@ footer{background:var(--black)}
 
 <!-- Order tray bar -->
 <div id="trayBar" role="status">
-  <span class="tray-info"><b id="trayCount">0</b> ITEM(S) IN YOUR TRAY — CALL TO PLACE THE ORDER</span>
+  <span class="tray-info"><b id="trayCount">0</b> ITEM(S) IN YOUR TRAY — CALL OR ORDER ON ZOMATO</span>
   <span class="tray-actions">
     <a href="tel:+919544454300" class="btn btn-fill">Call To Order</a>
+    <a href="https://www.zomato.com/trivandrum/burgon-palayam/order" class="btn btn-ghost" target="_blank" rel="noopener">Zomato ↗</a>
     <button id="trayClear" aria-label="Clear tray">Clear ✕</button>
   </span>
 </div>
