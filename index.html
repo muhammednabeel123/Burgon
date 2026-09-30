@@ -647,15 +647,14 @@ footer{background:var(--black)}
 
     <!-- Category filters -->
     <div class="filters reveal" role="tablist" aria-label="Menu categories">
-      <button class="filter-btn active" data-filter="all">01. ALL</button>
-      <button class="filter-btn" data-filter="craft">02. CRAFT</button>
-      <button class="filter-btn" data-filter="crispy">03. CRISPY</button>
-      <button class="filter-btn" data-filter="signature">04. SIGNATURE</button>
-      <button class="filter-btn" data-filter="loaded">05. LOADED</button>
-      <button class="filter-btn" data-filter="sandwich">06. SANDWICH</button>
-      <button class="filter-btn" data-filter="loaf">07. LOAF</button>
-      <button class="filter-btn" data-filter="wrap">08. WRAPS</button>
-      <button class="filter-btn" data-filter="sides">09. SIDES</button>
+      <button class="filter-btn active" data-filter="craft">01. CRAFT</button>
+      <button class="filter-btn" data-filter="crispy">02. CRISPY</button>
+      <button class="filter-btn" data-filter="signature">03. SIGNATURE</button>
+      <button class="filter-btn" data-filter="loaded">04. LOADED</button>
+      <button class="filter-btn" data-filter="sandwich">05. SANDWICH</button>
+      <button class="filter-btn" data-filter="loaf">06. LOAF</button>
+      <button class="filter-btn" data-filter="wrap">07. WRAPS</button>
+      <button class="filter-btn" data-filter="sides">08. SIDES</button>
     </div>
 
     <div class="menu-grid" id="menuGrid">
@@ -1237,7 +1236,7 @@ for (let filterButton of filterButtons) {
     // ---- Filter cards ----
     let selectedCategory = filterButton.dataset.filter;
     for (let menuCard of menuCards) {
-      let isMatch = selectedCategory === 'all' || menuCard.dataset.category === selectedCategory;
+      let isMatch = menuCard.dataset.category === selectedCategory;
       menuCard.classList.toggle('is-hidden', !isMatch);
       if (isMatch) {
         // ---- Re-trigger fade-in animation ----
@@ -1247,6 +1246,12 @@ for (let filterButton of filterButtons) {
       }
     }
   });
+}
+
+// ---- Show only the default category on load ----
+let defaultFilterButton = document.querySelector('.filter-btn.active');
+if (defaultFilterButton) {
+  defaultFilterButton.click();
 }
 
 // ---- Order tray (Add buttons → count + call bar) ----
